@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es2017",
+        "lib": [
+            "es2020",
+            "dom",
+            "webworker"
+        ],
+        "allowJs": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "Node",
+        "outDir": "build",
+    },
+    "include": [
+        "src/**/*",
+        "typings/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "dist",
+        "wasm"
+    ]
+}
