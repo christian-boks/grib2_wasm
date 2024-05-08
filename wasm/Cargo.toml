@@ -9,6 +9,9 @@ license = "MIT"
 [lib]
 crate-type = ["cdylib"]
 
+[package.metadata.wasm-pack.profile.dev.wasm-bindgen]
+dwarf-debug-info = true
+
 [profile.dev]
 lto = false
 panic = "unwind"
