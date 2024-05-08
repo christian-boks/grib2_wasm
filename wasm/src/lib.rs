@@ -1,4 +1,3 @@
-use grib2_reader::error::Grib2Error;
 use grib2_reader::{Grib2, Grib2Parser, GridDefinitionTemplate};
 use wasm_bindgen::prelude::*;
 
@@ -27,13 +26,13 @@ impl Parser {
         match self.parser.parse(data) {
             Ok(data) => {
                 match get_data(&data) {
-                    Ok((data, width, height)) => {
+                    Some((data, width, height)) => {
                         self.data = data;
                         self.width = width;
                         self.height = height;
                     }
-                    Err(err) => {
-                        console_log!("Get data failed: {:?}", &err);
+                    None => {
+                        console_log!("Get data failed");
                     }
                 };
             }
@@ -56,7 +55,7 @@ impl Parser {
     }
 }
 
-pub fn get_data(grib: &Grib2) -> Result<(Vec<f32>, usize, usize), Grib2Error> {
+pub fn get_data(grib: &Grib2) -> Option<(Vec<f32>, usize, usize)> {
     let data = &grib.data[0].data;
 
     if let Some(grid_def) = &grib.grid_definition {
@@ -67,12 +66,11 @@ pub fn get_data(grib: &Grib2) -> Result<(Vec<f32>, usize, usize), Grib2Error> {
             let mut output: Vec<f32> = vec![0.; nx * ny];
             output.copy_from_slice(&data[..]);
 
-            return Ok((output, nx, ny));
+            return Some((output, nx, ny));
         }
     }
 
-    // TODO: Define an actual error for this case
-    Ok((vec![], 0, 0))
+    None
 }
 
 pub fn set_panic_hook() {

@@ -1,12 +1,15 @@
 # Grib2 Wasm Example
 
-Small example to view a grib2 file decoded using a Rust web assembly module.
+Minimal example to view a grib2 file decoded using a Rust WebAssembly module.
 
-To get the source code displayed in chrome debugger:
+## Build Instructions
+
+Go to the `wasm` folder and run the following commands:
 
 1. `cargo build --target wasm32-unknown-unknown`
 1. `wasm-bindgen ./target/wasm32-unknown-unknown/debug/grib2_wasm.wasm --keep-debug --debug --target web --out-dir ./pkg`
 
-The magic argument here is `--keep-debug` that instructs wasm-bindgen to keep the DWARF symbols in the output wasm file.
+Then in the root folder run `npm install` first and then `npm run start` to serve the code on http://localhost:9000
 
 
+Example Grib data from the Danish Meteorological Institute - License CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)

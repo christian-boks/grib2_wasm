@@ -13,7 +13,7 @@ export class App {
         this.worker.postMessage({ request: "init" });
     }
 
-    async workerInitComplete() {
+    workerInitComplete() {
         this.worker.postMessage({ request: "loadData" });
     }
 
